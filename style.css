@@ -147,3 +147,72 @@ button:active{
         font-size: small;
     }
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+/* Responsive layout - when the screen is less than 600px wide, make the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+    }
+  }
+
+.settingsDiv {
+    display: table;
+  }
+  .settingRow {
+    display: table-row;
+  }
+  .label {
+    display: table-cell;
+    padding-right: 1em;
+  }
+
+.checkbox-grid li {
+    display: block;
+    float: left;
+    width: 100%;
+  }
+.checkbox-grid label {
+    margin: 1%;
+    font-size: small;
+}
+.checkbox-grid input {
+    left: 10%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: medium;
+    color: black;
+    display: inline-block;
+    border: black;
+    text-decoration: underline;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    color: blue;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}

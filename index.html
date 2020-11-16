@@ -1,51 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="author" content="Gabriele Coco">
+    <meta name="author" content="Gabriele Coco, Lorusso Michele">
     <meta name="description" content="Free and Open source Minecraft clone in Three.js">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="HTML, CSS, JavaScript,Minecraft,clone,minecraft-clone,minecraft,Clone,minceraft-clon,noise,perlin,procedural,terrain,Gabriele,gabriele,pio,Pio,coco,Coco,28">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Minecraft, clone, minecraft-clone, minecraft, Clone, minceraft-clon, noise, perlin, procedural, terrain, Gabriele, gabriele, pio, Pio, coco, Coco, 28">
     <title>minecraft-clone</title>
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/minecraftia" type="text/css"/>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="Assets/favicon.png" type="image/x-icon">
 </head>
 <body>
+
+
     <button id="saveScene">Save GLB</button>
     <img src="Assets/logo.png" id="logo">
-    <div id="preferences">
-        <h2>Insert the chunk size: <br></h2>
-        <input type="number" id="chunkSize" min="16" max="256" step="1" value="64"><br />
+    <div id="preferences" style="margin: 0% 5%;">
+        <h1 style="font-size: xx-large; color: antiquewhite;">Customization</h1>
+        <div class="row" style="margin: 2% 5%;">
+            <div class="column">
+                <h2 style="font-size: x-large; margin-top: 5%;">World Generation</h2>
+                <h2 style="display: inline-block; margin: 1%;">Insert the chunk size:</h2>
+                <input type="number" id="chunkSize" min="16" max="256" step="1" value="64" style="text-align: end; align-items: center;"><br>
+        
+                <h2 style="display: inline-block; margin: 1%; font-size: 16px;">Insert the amplitude:<span></h2>
+                <input type="number" id="amplitude" min="16" max="256" step="1" value="60" style="text-align: end; align-items: center;"><br>
+        
+                <h2 style="display:inline-block; margin: 1%;">Insert the frequence:</h2>
+                <input type="number" id="frequence" min="16" max="256" step="1" value="90" style="text-align: end; align-items: center;"><br>
+        
+                <h1>World type<br></h2>
+                <input type="radio" name = "generation" id="normal" value="normal"><h3 style="font-size: medium; display: inline; margin: 1%;">Normal</h3>
+                <input type="radio" name = "generation" id="flat" value="flat"><h3 style="font-size: medium; display: inline; margin: 1%;">Flat</h3>
+            </div>
+            <div class="column" style="display: table;">
+                <h2 style="font-size: x-large; margin-top: 5%;">Quality settings</h2>
 
-        <h2>Insert the amplitude: <br></h2>
-        <input type="number" id="amplitude" min="16" max="256" step="1" value="60"><br />
+                <ul class="checkbox-grid" style="text-align: left; padding-left: 40%;">
+                    <li><input type="checkbox" id="clouds" name="text1" /><label>Clouds</label></li>
+                    <li><input type="checkbox" id="trees" name="text2" /><label>Trees</label></li>
+                    <li><input type="checkbox" id="shadows" name="text3" /><label>Shadows</label></li>
+                    <li><input type="checkbox" id="antialiasingCheck" name="text4" /><label>Antialiasing</label></li>
+                    <li><input type="checkbox" id="advancedWater" name="text5" /><label>Advanced water</label></li>
 
-        <h2>Insert the frequence: <br></h2>
-        <input type="number" id="frequence" min="16" max="256" step="1" value="90"><br />
+                  </ul>
 
-        <h2>What world generation do you want?<br></h2>
-        <input type="radio" name = "generation" id="normal" value="normal">normal<br>
-        <input type="radio" name = "generation" id="flat" value="flat">flat<br>
+                <p style="font-size: large; margin: 2%;">Choose the shadow quality:</p>
+                <select id="shadowQuality">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="basic">Basic</option>
+                </select><br>
+            </div>
+            <div class="column">
+                <h2 style="font-size: x-large; margin-top: 5%;">Custom textures</h2>
+                <p style="font-size: medium; margin: 2%;">Custom textures (optional):</p>
+                <input type="file" name="file" id="texture" accept="image/png, image/jpeg"class="inputfile" data-multiple-caption="{count} files selected" multiple />
+                <label for="texture" id="fileName">Choose a file...</label> <br>
 
-        <input type="checkbox"  id="clouds" >Clouds<br>
-        <input type="checkbox"  id="trees" >Trees<br>
-        <input type="checkbox"  id="shadows" >Shadows<br>
-        <input type="checkbox" id="antialiasingCheck">Antialiasing<br>
-        <input type="checkbox" id="advancedWater">Advanced water<br>
 
-        <p>Choose the shadow quality:</p>
-        <select id="shadowQuality">
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="basic">Basic</option>
-        </select><br>
-        <p>Choose a custom texture or leave it default:</p>
-        <input type="file"id="texture"accept="image/png, image/jpeg"><br>
-        <input type="button" id="downloadTexture" value="Click here to download the default texture "><br>
-
-        <button id="generate">Generate World!</button>
+                <input type="button" id="downloadTexture" value="Download default texture" style="padding: 1%; margin:2%"><br>
+            </div>
+          </div>        
+          <button id="generate"><h4 style="font-size: x-large;">Let's go!</h4></button> 
+        </div>   
+        
     </div>
+
+
+
     <div id="loader"></div>
     <div id="ui">
         <div class="tiles">
@@ -89,6 +113,29 @@
             <input type="radio" name="voxel" id="voxel32" value="32"><label for="voxel32" style="background-position: -3100% -0%"></label>
         </div>
     </div>
+    <script>
+        var inputs = document.querySelectorAll( '.inputfile' );
+        Array.prototype.forEach.call( inputs, function( input )
+        {
+            var label	 = input.nextElementSibling,
+                labelVal = label.innerHTML;
+
+            input.addEventListener( 'change', function( e )
+            {
+                var fileName = '';
+                if( this.files && this.files.length > 1 )
+                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                else
+                    fileName = e.target.value.split( "\\" ).pop();
+
+                if( fileName )
+                    document.getElementById("fileName").innerHTML = fileName;
+                else
+                    label.innerHTML = labelVal;
+            });
+        });
+    </script>
+
     <script src="/noisejs-master/perlin.js"></script>
     <script src="/script.js" type="module"></script>
 </body>
